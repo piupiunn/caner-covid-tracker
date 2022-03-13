@@ -8,10 +8,11 @@ import {
 } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import InfoBox from "./InfoBox";
-import Map from "./Map";
+import CovidMap from "./CovidMap";
 import Table from "./Table";
 import { sortData } from "./util";
 import LineGraph from "./LineGraph";
+import "leaflet/dist/leaflet.css";
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -19,6 +20,12 @@ function App() {
   const [countryInfo, setCountryInfo] = useState({});
   const [tableData, setTableData] = useState([]);
   const [casesType, setCasesType] = useState("cases");
+  const [mapCenter, setMapCenter] = useState({
+    lat: 34.80746,
+    lng: -40.4796,
+  });
+  const [mapZoom, setMapZoom] = useState(3);
+  const [mapCountries, setMapCountries] = useState([]);
 
   useEffect(() => {
     fetch("https://disease.sh/v3/covid-19/all").then((response) =>
@@ -40,7 +47,9 @@ function App() {
 
           const sortedData = sortData(data);
           setTableData(sortedData);
+
           setCountries(countries);
+          setMapCountries(data);
         });
     };
     fetchData();
@@ -57,6 +66,9 @@ function App() {
       .then((data) => {
         setCountry(countryCode);
         setCountryInfo(data);
+
+        setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+        setMapZoom(4);
       });
     console.log(countryInfo);
   };
@@ -91,8 +103,10 @@ function App() {
             total={countryInfo.deaths}
           />
         </div>
-        <Map />
+
+        <CovidMap countries={mapCountries} center={mapCenter} zoom={mapZoom} />
       </div>
+
       <Card className="right">
         <div className="information">
           <h3>Live Cases by country</h3>
