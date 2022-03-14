@@ -2,29 +2,33 @@ import React from "react";
 import numeral from "numeral";
 import { Circle, Popup } from "react-leaflet";
 
-export const sortData = (data) => {
-  const sortedData = [...data];
-
-  return sortedData.sort((a, b) => (a.cases > b.cases ? -1 : 1));
-};
-
-//
 const casesTypeColors = {
   cases: {
     hex: "#CC1034",
-    multiplier: 125,
+    multiplier: 120,
   },
   recovered: {
     hex: "#7dd71d",
-    multiplier: 300,
+    multiplier: 100,
   },
   deaths: {
     hex: "#fb4443",
-    multiplier: 500,
+    multiplier: 300,
   },
 };
 
-//draw circles on the map
+export const sortData = (data) => {
+  let sortedData = [...data];
+  sortedData.sort((a, b) => {
+    if (a.cases > b.cases) {
+      return -1;
+    } else {
+      return 1;
+    }
+  });
+  return sortedData;
+};
+
 export const prettyPrintStat = (stat) =>
   stat ? `+${numeral(stat).format("0.0a")}` : "+0";
 
@@ -32,8 +36,8 @@ export const showDataOnMap = (data, casesType = "cases") =>
   data.map((country) => (
     <Circle
       center={[country.countryInfo.lat, country.countryInfo.long]}
-      color={casesTypeColors[casesType].hex}
-      fillColor={casesTypeColors[casesType].hex}
+      color={casesTypeColors[casesType]}
+      fillColor={casesTypeColors[casesType]}
       fillOpacity={0.4}
       radius={
         Math.sqrt(country[casesType]) * casesTypeColors[casesType].multiplier
