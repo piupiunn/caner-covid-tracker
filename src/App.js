@@ -22,7 +22,7 @@ const App = () => {
   const [mapCountries, setMapCountries] = useState([]);
   const [tableData, setTableData] = useState([]);
   const [casesType, setCasesType] = useState("cases");
-  const [mapCenter, setMapCenter] = useState([34.80746, -40.4796]);
+  const [mapCenter, setMapCenter] = useState([34, -40]);
   const [mapZoom, setMapZoom] = useState(3);
 
   useEffect(() => {
@@ -51,8 +51,6 @@ const App = () => {
 
     getCountriesData();
   }, []);
-
-  console.log(casesType);
 
   const onCountryChange = async (e) => {
     const countryCode = e.target.value;
@@ -88,6 +86,7 @@ const App = () => {
               ))}
             </Select>
           </FormControl>
+          <LineGraph className="graph" casesType={casesType} />
         </div>
         <div className="stats">
           <InfoBox
@@ -114,11 +113,13 @@ const App = () => {
             total={numeral(countryInfo.deaths).format("0.0a")}
           />
         </div>
+
         <CovidMap
           countries={mapCountries}
           casesType={casesType}
           center={mapCenter}
           zoom={mapZoom}
+          showDataOnMap
         />
       </div>
       <Card className="right">
@@ -126,8 +127,6 @@ const App = () => {
           <div className="information">
             <h3>Live Cases by Country</h3>
             <Table countries={tableData} />
-            <h3>Worldwide new {casesType}</h3>
-            <LineGraph className="graph" casesType={casesType} />
           </div>
         </CardContent>
       </Card>
