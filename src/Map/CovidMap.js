@@ -8,17 +8,14 @@ export default function CovidMap({ countries, casesType, center, zoom }) {
   const casesTypeColors = {
     cases: {
       hex: "#0D1117",
-
       multiplier: 120,
     },
     recovered: {
       hex: "#7dd71d",
-
       multiplier: 100,
     },
     deaths: {
       hex: "#fb4443",
-
       multiplier: 300,
     },
   };
