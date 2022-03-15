@@ -68,7 +68,7 @@ const App = () => {
         setMapZoom(4);
       });
   };
-  console.log(countryInfo.todayRecovered);
+  console.log(mapCenter, mapZoom);
 
   return (
     <div className="app">

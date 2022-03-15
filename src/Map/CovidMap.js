@@ -7,7 +7,8 @@ import { Circle, Popup } from "react-leaflet";
 export default function CovidMap({ countries, casesType, center, zoom }) {
   const casesTypeColors = {
     cases: {
-      hex: "#0D1117",
+      hex: "#FF0000",
+
       multiplier: 120,
     },
     recovered: {
@@ -15,7 +16,7 @@ export default function CovidMap({ countries, casesType, center, zoom }) {
       multiplier: 100,
     },
     deaths: {
-      hex: "#fb4443",
+      hex: "#0D1117",
       multiplier: 300,
     },
   };
@@ -24,9 +25,11 @@ export default function CovidMap({ countries, casesType, center, zoom }) {
     data.map((country) => (
       <Circle
         center={[country.countryInfo.lat, country.countryInfo.long]}
-        color={casesTypeColors[casesType].hex}
-        fillColor={casesTypeColors[casesType].hex}
-        fillOpacity={0.4}
+        pathOptions={{
+          color: casesTypeColors[casesType].hex,
+          fillColor: casesTypeColors[casesType].hex,
+          fillOpacity: 0.4,
+        }}
         radius={
           Math.sqrt(country[casesType]) * casesTypeColors[casesType].multiplier
         }
