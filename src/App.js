@@ -10,7 +10,7 @@ import {
 import InfoBox from "../src/InfoBox/InfoBox";
 import LineGraph from "../src/LineGraph/LineGraph";
 import Table from "../src/Table/Table";
-import { sortData, prettyPrintStat } from "./util";
+import { sortData, prettyPrintStat } from "./functions";
 import numeral from "numeral";
 import CovidMap from "../src/Map/CovidMap";
 import "leaflet/dist/leaflet.css";
@@ -65,7 +65,7 @@ const App = () => {
         setInputCountry(countryCode);
         setCountryInfo(data);
         setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
-        setMapZoom(4);
+        setMapZoom(5);
       });
   };
   console.log(mapCenter, mapZoom);

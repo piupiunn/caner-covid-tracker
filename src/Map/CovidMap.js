@@ -1,8 +1,7 @@
 import React from "react";
-import { MapContainer, TileLayer } from "react-leaflet";
+import { MapContainer, TileLayer, Circle, Popup, useMap } from "react-leaflet";
 import "./Map.css";
 import numeral from "numeral";
-import { Circle, Popup } from "react-leaflet";
 
 export default function CovidMap({ countries, casesType, center, zoom }) {
   const casesTypeColors = {
@@ -55,9 +54,16 @@ export default function CovidMap({ countries, casesType, center, zoom }) {
       </Circle>
     ));
 
+  const ChangeView = ({ center, zoom }) => {
+    const map = useMap();
+    map.setView(center, zoom);
+    return null;
+  };
+
   return (
     <div className="map">
       <MapContainer center={center} zoom={zoom}>
+        <ChangeView center={center} zoom={zoom} />
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
