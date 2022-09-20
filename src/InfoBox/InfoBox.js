@@ -12,14 +12,14 @@ function InfoBox({ title, cases, total, active, isRed, onClick }) {
     >
       <CardContent>
         <Typography color="textSecondary" gutterBottom>
-          {title}
+          <span className="infoBox__title1">{title}</span>
         </Typography>
         <h2 className={`infoBox__cases ${!isRed && "infoBox__cases--green"}`}>
-          {cases}
+          <span className="infoBox__title2"> {cases}</span>
         </h2>
 
         <Typography className="infoBox__total" color="textSecondary">
-          {total} Total
+          <span className="infoBox__title3"> {total} Total</span>
         </Typography>
       </CardContent>
     </Card>

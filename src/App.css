@@ -32,6 +32,8 @@ body {
 .header > h1 {
   color: #fc3c3c;
   font-size: 2rem;
+  width: 100%;
+  margin: auto;
 }
 
 .stats {
