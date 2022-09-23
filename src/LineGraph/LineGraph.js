@@ -80,23 +80,26 @@ function LineGraph({ casesType = "cases", ...props }) {
   }, [casesType]);
 
   return (
-    <div>
-      {data?.length >= 0 && (
-        <Line
-          className={props.className}
-          data={{
-            datasets: [
-              {
-                backgroundColor: "rgba(204, 16, 52, 0.5)",
-                borderColor: "#FF0000",
-                data: data,
-              },
-            ],
-          }}
-          options={options}
-        />
-      )}
-    </div>
+    <>
+      <h3>Last 120 days</h3>
+      <div>
+        {data?.length >= 0 && (
+          <Line
+            className={props.className}
+            data={{
+              datasets: [
+                {
+                  backgroundColor: "rgba(204, 16, 52, 0.5)",
+                  borderColor: "#FF0000",
+                  data: data,
+                },
+              ],
+            }}
+            options={options}
+          />
+        )}
+      </div>
+    </>
   );
 }
 
