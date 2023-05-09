@@ -42,7 +42,7 @@ body {
 }
 
 .left {
-  flex: 0.9;
+  width: 75%;
 }
 
 .information > h3 {
@@ -64,4 +64,14 @@ body {
   .app {
     flex-direction: column;
   }
+  .left {
+    width: 100% !important;
+  }
+  .right {
+    width: 100% !important;
+    margin-top: 20px;
+  }
+}
+.right {
+  width: 23%;
 }
